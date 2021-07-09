@@ -1,6 +1,6 @@
 module.exports = {
-    HOST: "localhost",
-    USER: "root",
-    PASSWORD: "",
-    DB: "testdb"
+    HOST: "db-cluster.rmuti.ac.th",
+    USER: "kminnovations",
+    PASSWORD: "+kminnovations;12588-",
+    DB: "kminnovations"
 };
