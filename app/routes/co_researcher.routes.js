@@ -4,4 +4,3 @@ module.exports = (app) => {
     app.get("/api/get/co-researcher", co_researcher.findAll);
 
   };
-  
