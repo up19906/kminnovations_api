@@ -17,7 +17,8 @@ const Coordinator_about_fundingagency = function (data) {
 };
 
 Coordinator_about_fundingagency.findAll = (result) => {
-  sql.query("SELECT * FROM coordinator_about_fundingagency", (err, res) => {
+  sql.query("SELECT * FROM coordinator_about_fundingagency", 
+  (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -68,7 +69,7 @@ Coordinator_about_fundingagency.create = (newData, result) => {
         return;
       }
 
-      console.log("created user: ", { id: res.insertId, ...newData });
+      console.log("created: ", { id: res.insertId, ...newData });
       result(null, { id: res.insertId, ...newData });
     }
   );

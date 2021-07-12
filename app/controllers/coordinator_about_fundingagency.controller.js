@@ -44,7 +44,7 @@ exports.create = (req, res) => {
       else
         res
           .status(200)
-          .send({ massage: "this data has been save now.", result: data });
+          .send(data);
     }
   );
 };

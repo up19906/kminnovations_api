@@ -14,18 +14,18 @@ const Coordinator_fundingagency_project = function (data) {
   this.fundingagency_project_upload = data.fundingagency_project_upload;
 };
 
-// Coordinator_about_fundingagency.findAll = (result) => {
-//   sql.query("SELECT * FROM coordinator_about_fundingagency", (err, res) => {
-//     if (err) {
-//       console.log("error: ", err);
-//       result(null, err);
-//       return;
-//     }
+Coordinator_fundingagency_project.findAll = (result) => {
+  sql.query("SELECT * FROM coordinator_fundingagency_project", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
 
-//     console.log("coordinator_about_fundingagency: ", res);
-//     result(null, res);
-//   });
-// };
+    console.log("Coordinator_fundingagency_project: ", res);
+    result(null, res);
+  });
+};
 
 Coordinator_fundingagency_project.create = (newData, result) => {
   sql.query(

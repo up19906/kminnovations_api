@@ -1,15 +1,15 @@
 const Coordinator_fundingagency_project = require("../models/coordinator_fundingagency_project.model.js");
 
-// exports.findAll = (req, res) => {
-//     Coordinator_fundingagency_project.findAll((err, data) => {
-//     if (err)
-//       res.status(500).send({
-//         message:
-//           err.message || "Some error occurred while retrieving Coordinator about fundingagency.",
-//       });
-//     else res.send(data);
-//   });
-// };
+exports.findAll = (req, res) => {
+    Coordinator_fundingagency_project.findAll((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving.",
+      });
+    else res.send(data);
+  });
+};
 
 exports.create = (req, res) => {
   //   console.log(req);
@@ -72,7 +72,7 @@ exports.create = (req, res) => {
           else
             res
               .status(200)
-              .send({ massage: "this data has been save now.", result: data });
+              .send(data);
         }
       );
     });
