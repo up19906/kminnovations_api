@@ -18,7 +18,7 @@ run nodejs app project
 npm start
 ```
 
-app running on port 400
+app running on port 4000
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
