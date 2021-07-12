@@ -28,6 +28,16 @@ require("./app/routes/source_funds.routes")(app);
 require("./app/routes/pretent_type.routes")(app);
 require("./app/routes/consept_proposal.routes")(app);
 require("./app/routes/user_group.routes")(app);
+require("./app/routes/us_publication.routes")(app);
+require("./app/routes/us_educational.routes")(app);
+require("./app/routes/bb_user.routes")(app);
+require("./app/routes/co_researcher.routes")(app);
+require("./app/routes/us_award.routes")(app);
+require("./app/routes/us_project.routes")(app);
+require("./app/routes/us_patent.routes")(app);
+require("./app/routes/co_researcher_expertise.routes")(app);
+require("./app/routes/us_certificate.routes")(app);
+require("./app/routes/us_working_experience.routes")(app);
 require("./app/routes/coordinator_fundingagency.routes")(app);
 require("./app/routes/coordinator_fundingagency_academic.routes")(app);
 
