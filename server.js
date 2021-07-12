@@ -24,10 +24,17 @@ app.get("/", (req, res, next) => {
 require("./app/routes/coordinator_about_fundingagency.routes")(app);
 require("./app/routes/coordinator_fundingagency_project.routes")(app);
 require("./app/routes/project_type.routes")(app);
+require("./app/routes/co_researcher_award.routes")(app);
+require("./app/routes/co_researcher_group.routes")(app);
+require("./app/routes/co_researcher_expertise_type.routes")(app);
 require("./app/routes/source_funds.routes")(app);
+require("./app/routes/co_researcher_publication_type.routes")(app);
 require("./app/routes/pretent_type.routes")(app);
 require("./app/routes/consept_proposal.routes")(app);
 require("./app/routes/user_group.routes")(app);
+require("./app/routes/co_researcher_publication.routes")(app);
+require("./app/routes/co_researcher_knowledge_group.routes")(app);
+require("./app/routes/co_researcher_knowledge.routes")(app);
 require("./app/routes/us_publication.routes")(app);
 require("./app/routes/us_educational.routes")(app);
 require("./app/routes/bb_user.routes")(app);

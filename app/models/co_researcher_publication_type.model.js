@@ -2,14 +2,14 @@ const sql = require("./db.js");
 
 const findAll = (result) => {
   sql.query(
-        `SELECT * FROM co_researcher_group`, (err, res) => {
+        `SELECT * FROM co_researcher_publication_type`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("co_researcher_group: ", res);
+    console.log("co_researcher_publication_type: ", res);
     result(null, res);
   });
 };
