@@ -1,13 +1,21 @@
 const Bb_user = require("../models/bb_user.model");
 
 exports.findAll = (req, res) => {
-    Bb_user((err, data) => {
+  Bb_user.findAllUser((err, data) => {
     if (err)
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving.",
+        message: err.message || "Some error occurred while retrieving.",
       });
     else res.send(data);
   });
 };
 
+exports.findByIdCard = (req, res, next) => {
+  Bb_user.findOne(req.user_idcard, next, (err, data)=> {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving.",
+      });
+    else res.send(data);
+  });
+};

@@ -21,6 +21,7 @@ app.get("/", (req, res, next) => {
   res.send({ messge: "Hello World.." });
 });
 
+require("./app/routes/auth.routes")(app);
 require("./app/routes/coordinator_about_fundingagency.routes")(app);
 require("./app/routes/coordinator_fundingagency_project.routes")(app);
 require("./app/routes/project_type.routes")(app);
