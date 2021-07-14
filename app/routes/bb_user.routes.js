@@ -10,6 +10,8 @@ module.exports = (app) => {
     next();
   });
 
+  app.get("/api/get/bb-user/:id_card", bb_user.findOne);
+
   app.get("/api/get/bb-user", bb_user.findAll);
 
   app.get("/api/get/bb-user-v1", [authJwt.verifyToken], bb_user.findAll);

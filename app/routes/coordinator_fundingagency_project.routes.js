@@ -3,6 +3,6 @@ module.exports = (app) => {
   
     app.get("/api/get/coordinator_fundingagency_project", coordinator_fundingagency_project.findAll);
   
-    app.post("/api/get/coordinator_fundingagency_project", coordinator_fundingagency_project.create);
+    app.post("/api/post/coordinator_fundingagency_project", coordinator_fundingagency_project.create);
   };
   

@@ -3,5 +3,5 @@ module.exports = (app) => {
 
   app.get("/api/get/coordinator_about_fundingagency", coordinator_about_fundingagency.findAll);
 
-  app.post("/api/get/coordinator_about_fundingagency", coordinator_about_fundingagency.create);
+  app.post("/api/post/coordinator_about_fundingagency", coordinator_about_fundingagency.create);
 };

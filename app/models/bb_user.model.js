@@ -62,13 +62,28 @@ User.signIn = (data, result) => {
   );
 };
 
+User.findById = (id, result) => {
+  sql.query(
+    `SELECT * FROM bb_user u WHERE u.user_idcard = ${id}`,
+    (err, res) => {
+      if (err) {
+        result(null, err);
+        return;
+      }
+
+      result(null, res);
+    }
+  );
+};
+
 User.findOne = (id, next, result) => {
   console.log(id);
   sql.query(
-    `SELECT u.user_idcard,user_first_name_th,user_last_name_th, u.user_password, r.role_name FROM bb_user AS u 
-  INNER JOIN bb_user_role AS ur ON ur.user_idcard = u.user_idcard
-  INNER JOIN bb_role AS r ON r.role_id = ur.role_id
-  WHERE u.user_idcard = ${id}`,
+    `SELECT u.user_idcard,user_first_name_th,user_last_name_th, u.user_password, r.role_name 
+    FROM bb_user AS u 
+      INNER JOIN bb_user_role AS ur ON ur.user_idcard = u.user_idcard
+      INNER JOIN bb_role AS r ON r.role_id = ur.role_id
+    WHERE u.user_idcard = ${id}`,
     (err, res) => {
       if (err) {
         result(null, err);

@@ -8,18 +8,11 @@ exports.singIn = (req, res) => {
     user_password: req.body.password,
   });
 
-  User.signIn(
-    user,
-    (err, data) => {
-      if (err)
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while login.",
-        });
-      else
-        res
-          .status(200)
-          .send(data);
-    }
-  );
+  User.signIn(user, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while login.",
+      });
+    else res.status(200).send(data);
+  });
 };
