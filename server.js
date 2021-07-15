@@ -17,7 +17,7 @@ app.use(
   })
 );
 
-app.get("/", (req, res, next) => {
+app.get("/api", (req, res, next) => {
   res.send({ messge: "Hello World.." });
 });
 
