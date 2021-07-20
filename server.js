@@ -17,8 +17,8 @@ app.use(
   })
 );
 
-app.get("/api", (req, res, next) => {
-  res.send({ messge: "Hello World.." });
+app.get("/", (req, res, next) => {
+  res.send({ messge: "Welcome to Km-innovations RESTFul API.. Have a good day.. :)" });
 });
 
 require("./app/routes/auth.routes")(app);
