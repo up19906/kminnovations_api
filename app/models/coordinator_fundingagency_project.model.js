@@ -39,7 +39,7 @@ Coordinator_fundingagency_project.create = (newData, result) => {
     fundingagency_project_agency,
     fundingagency_project_latitude,
     fundingagency_project_Longitude,
-    fundingagency_project_status,
+    coordinator_fundingagency_status_id,
     fundingagency_project_upload,
     created_date,
     updated_date

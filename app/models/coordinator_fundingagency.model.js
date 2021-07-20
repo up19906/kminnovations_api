@@ -4,40 +4,58 @@ const sql = require("./db.js");
 const Coordinator_fundingagency = function (data) {
   this.coordinater_funding_id = data.coordinater_funding_id;
   this.funding_project_name = data.funding_project_name;
-  this.coordinator_project= data.coordinator_project;
-  this.funding_agency= data.funding_agency;
-  this.funding_project_leader= data.funding_project_leader;
-  this.funding_phone =data.funding_phone;
-  this.funding_year =data.funding_year;
+  this.coordinator_project = data.coordinator_project;
+  this.funding_agency = data.funding_agency;
+  this.funding_project_leader = data.funding_project_leader;
+  this.funding_phone = data.funding_phone;
+  this.select_research = data.select_research;
+  this.project_status = data.project_status;
+  this.funding_year = data.funding_year;
   this.funding_budget = data.funding_budget;
   this.funding_name = data.funding_name;
-  this.coordinator_univercity_budget= data.coordinator_univercity_budget;
-  this.funding_user_id=data.funding_user_id;
-  this.funding_created_by= data.funding_created_by;
-  this.funding_created_date= data.funding_created_date;
-  this.funding_updated_by= data.funding_updated_by;
-  this.funding_updated_date=data.funding_updated_date;    
-  //....
+  this.funding_type = data.funding_type;
+  this.coordinator_univercity_budget = data.coordinator_univercity_budget;
+  this.user_id = data.user_id;
+  this.created_by = data.created_by;
 };
 
 Coordinator_fundingagency.create = (newData, result) => {
   sql.query(
-    "INSERT INTO coordinator_fundingagency (coordinater_funding_project_name , coordinator_project,coordinater_funding_agency,project_leader,coordinater_funding_phone,coordinater_funding_year,coordinater_funding_budget,coordinater_funding_name,coordinator_univercity_budget,user_idcard,created_by,created_date,updated_by,updated_date) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    `INSERT INTO coordinator_fundingagency 
+    (
+      coordinater_funding_project_name , 
+      coordinator_project,
+      coordinater_funding_agency,
+      project_leader,
+      coordinater_funding_phone,
+      coordinater_funding_ac_research_team,
+      coordinator_fundingagency_status_id,
+      coordinater_funding_year,
+      coordinater_funding_budget,
+      coordinater_funding_name,
+      budget_id,
+      coordinator_univercity_budget,
+      user_idcard,
+      created_by,
+      created_date
+    ) 
+    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
     [
       newData.funding_project_name,
       newData.coordinator_project,
       newData.funding_agency,
       newData.funding_project_leader,
       newData.funding_phone,
+      newData.select_research,
+      newData.project_status,
       newData.funding_year,
       newData.funding_budget,
       newData.funding_name,
+      newData.funding_type,
       newData.coordinator_univercity_budget,
-      newData.funding_user_id,
-      newData.funding_created_by,
-      newData.funding_created_date,
-      newData.funding_updated_by,
-      newData.funding_updated_date,
+      newData.user_id,
+      newData.created_by,
+      new Date(),
     ],
     (err, res) => {
       if (err) {
@@ -50,7 +68,7 @@ Coordinator_fundingagency.create = (newData, result) => {
       result(null, { id: res.insertId, ...newData });
     }
   );
-}
+};
 
 Coordinator_fundingagency.update = (id, newData, result) => {
   sql.query(
@@ -86,49 +104,51 @@ Coordinator_fundingagency.update = (id, newData, result) => {
       result(null, { id: id, ...newData });
     }
   );
-}
+};
 
 Coordinator_fundingagency.delete = (id, result) => {
-  sql.query("DELETE FROM coordinator_fundingagency WHERE coordinater_funding_id = ? ", 
-  id, 
-  (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
+  sql.query(
+    "DELETE FROM coordinator_fundingagency WHERE coordinater_funding_id = ? ",
+    id,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows == 0) {
+        // not found Data with the id
+        result({ message: "not_found" }, null);
+        return;
+      }
+
+      console.log("deleted Data with id: ", id);
+      result(null, res);
     }
-
-    if (res.affectedRows == 0) {
-      // not found Data with the id
-      result({ message: "not_found" }, null);
-      return;
-    }
-
-    console.log("deleted Data with id: ", id);
-    result(null, res);
-  });
-
-}
+  );
+};
 
 Coordinator_fundingagency.findOne = (year, result) => {
-    sql.query(`SELECT SUM(coordinater_funding_budget)sum FROM coordinator_fundingagency WHERE YEAR(created_date) = ${year}`, 
+  sql.query(
+    `SELECT SUM(coordinater_funding_budget)sum FROM coordinator_fundingagency WHERE YEAR(created_date) = ${year}`,
     (err, res) => {
-        if (err) {
-          console.log("error: ", err);
-          result(null, err);
-          return;
-        }
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
 
-        if (res.length) {
-            console.log("found: ", res[0]);
-            result(null, res[0]);
-            return;
-          }
-      
-          result({ message: "not_found" }, null);
-    
-      });
-}
+      if (res.length) {
+        console.log("found: ", res[0]);
+        result(null, res[0]);
+        return;
+      }
+
+      result({ message: "not_found" }, null);
+    }
+  );
+};
 
 Coordinator_fundingagency.findAll = (result) => {
   sql.query("SELECT * FROM coordinator_fundingagency", (err, res) => {
@@ -141,10 +161,12 @@ Coordinator_fundingagency.findAll = (result) => {
     console.log("coordinator_fundingagency: ", res);
     result(null, res);
   });
-}
+};
 
 Coordinator_fundingagency.findById = (id, result) => {
-  sql.query(`SELECT * FROM coordinator_fundingagency WHERE coordinater_funding_id = ${id}`, (err, res) => {
+  sql.query(
+    `SELECT * FROM coordinator_fundingagency WHERE coordinater_funding_id = ${id}`,
+    (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -152,18 +174,20 @@ Coordinator_fundingagency.findById = (id, result) => {
       }
 
       if (res.length) {
-          console.log("found: ", res[0]);
-          result(null, res[0]);
-          return;
-        }
-    
-        result({ message: "not_found" }, null);
-  
-    });
-}
+        console.log("found: ", res[0]);
+        result(null, res[0]);
+        return;
+      }
+
+      result({ message: "not_found" }, null);
+    }
+  );
+};
 
 Coordinator_fundingagency.sumYearBudjet = (year, result) => {
-  sql.query(`SELECT SUM(coordinater_funding_budget)sum FROM coordinator_fundingagency WHERE coordinater_funding_year = ${year}`, (err, res) => {
+  sql.query(
+    `SELECT SUM(coordinater_funding_budget)sum FROM coordinator_fundingagency WHERE coordinater_funding_year = ${year}`,
+    (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -171,18 +195,20 @@ Coordinator_fundingagency.sumYearBudjet = (year, result) => {
       }
 
       if (res.length) {
-          console.log("found: ", res[0]);
-          result(null, res[0]);
-          return;
-        }
-    
-        result({ message: "not_found" }, null);
-  
-    });
-}
+        console.log("found: ", res[0]);
+        result(null, res[0]);
+        return;
+      }
+
+      result({ message: "not_found" }, null);
+    }
+  );
+};
 
 Coordinator_fundingagency.countByYear = (year, result) => {
-  sql.query(`SELECT * FROM coordinator_fundingagency WHERE coordinater_funding_year = ${year}`, (err, res) => {
+  sql.query(
+    `SELECT * FROM coordinator_fundingagency WHERE coordinater_funding_year = ${year}`,
+    (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -190,14 +216,14 @@ Coordinator_fundingagency.countByYear = (year, result) => {
       }
 
       if (res.length) {
-          console.log("found: ", res[0]);
-          result(null, res[0]);
-          return;
-        }
-    
-        result({ message: "not_found" }, null);
-  
-    });
-}
+        console.log("found: ", res[0]);
+        result(null, res[0]);
+        return;
+      }
+
+      result({ message: "not_found" }, null);
+    }
+  );
+};
 
 module.exports = Coordinator_fundingagency;
