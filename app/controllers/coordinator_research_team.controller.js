@@ -1,7 +1,7 @@
-const Project_type = require("../models/project_type.model.js");
+const coordinator_research_team = require("../models/coordinator_research_team.model.js");
 
 exports.findAll = (req, res) => {
-  Project_type.findAll((err, data) => {
+  coordinator_research_team.findAll((err, data) => {
     if (err)
       res.status(500).send({
         message:

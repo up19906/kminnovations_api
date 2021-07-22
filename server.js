@@ -18,7 +18,9 @@ app.use(
 );
 
 app.get("/", (req, res, next) => {
-  res.send({ messge: "Welcome to Km-innovations RESTFul API.. Have a good day.. :)" });
+  res.send({
+    messge: "Welcome to Km-innovations RESTFul API.. Have a good day.. :)",
+  });
 });
 
 require("./app/routes/auth.routes")(app);
@@ -51,6 +53,7 @@ require("./app/routes/us_certificate.routes")(app);
 require("./app/routes/us_working_experience.routes")(app);
 require("./app/routes/coordinator_fundingagency.routes")(app);
 require("./app/routes/coordinator_fundingagency_academic.routes")(app);
+require("./app/routes/coordinator_research_team.routes")(app);
 
 app.listen(4000, () => {
   console.log("Server running on port 4000");

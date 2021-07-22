@@ -131,7 +131,7 @@ Coordinator_fundingagency.delete = (id, result) => {
 
 Coordinator_fundingagency.findOne = (year, result) => {
   sql.query(
-    `SELECT SUM(coordinater_funding_budget)sum FROM coordinator_fundingagency WHERE YEAR(created_date) = ${year}`,
+    `SELECT SUM(coordinater_funding_budget)sum FROM coordinator_fundingagency WHERE YEAR(coordinater_funding_year) = ${year}`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -216,8 +216,8 @@ Coordinator_fundingagency.countByYear = (year, result) => {
       }
 
       if (res.length) {
-        console.log("found: ", res[0]);
-        result(null, res[0]);
+        console.log("found: ", res);
+        result(null, res);
         return;
       }
 

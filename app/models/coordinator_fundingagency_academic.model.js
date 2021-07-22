@@ -37,24 +37,24 @@ Coordinator_fundingagency_academic.create = (newData, result) => {
           created_by,
           created_date
         ) 
-      VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-    [
-      newData.funding_ac_name,
-      newData.funding_ac_project,
-      newData.funding_ac_agency,
-      newData.funding_ac_leader,
-      newData.funding_ac_phone,
-      newData.select_research,
-      newData.project_status,
-      newData.funding_ac_year,
-      newData.funding_ac_budget,
-      newData.funding_name,
-      newData.funding_type,
-      newData.univercity_ac_budget,
-      newData.user_id,
-      newData.created_by,
-      new Date(),
-    ],
+      VALUES
+        (
+          '${newData.funding_ac_name}'
+          '${newData.funding_ac_project}',
+          '${newData.funding_ac_agency}',
+          '${newData.funding_ac_leader}',
+          '${newData.funding_ac_phone}',
+          '${newData.select_research}',
+          '${newData.project_status}',
+          '${newData.funding_ac_year}',
+          '${newData.funding_ac_budget}',
+          '${newData.funding_name}',
+          '${newData.funding_type}',
+          '${newData.univercity_ac_budget}',
+          '${newData.user_id}',
+          '${newData.created_by}',
+          NOW()    
+      )`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -70,21 +70,19 @@ Coordinator_fundingagency_academic.create = (newData, result) => {
 
 Coordinator_fundingagency_academic.update = (id, newData, result) => {
   sql.query(
-    "UPDATE coordinator_fundingagency_academic SET coordinator_fundingagency_ac_name = ?, coordinator_ac_project= ?,coordinater_funding_ac_agency = ?,project_ac_leader= ?,coordinater_funding_ac_phone = ? ,coordinater_funding_ac_year= ?,coordinater_funding_ac_budget= ? ,coordinater_funding_ac_name= ? ,coordinator_univercity_ac_budget= ? ,updated_by = ? ,updated_date = ? WHERE coordinator_fundingagency_ac_id = ? ",
-    [
-      newData.funding_ac_name,
-      newData.funding_ac_project,
-      newData.funding_ac_agency,
-      newData.funding_ac_leader,
-      newData.funding_ac_phone,
-      newData.funding_ac_year,
-      newData.funding_ac_budget,
-      newData.funding_name,
-      newData.coordinator_univercity_ac_budget,
-      newData.funding_updated_by,
-      newData.funding_updated_date,
-      id,
-    ],
+    `UPDATE coordinator_fundingagency_academic SET 
+    fundingagency_ac_name = '${newData.funding_ac_name}', 
+    coordinator_ac_project = '${newData.funding_ac_project}',
+    coordinater_funding_ac_agency =  '${newData.funding_ac_agency}',
+    project_ac_leader = '${newData.funding_ac_leader}',
+    funding_ac_phone = '${newData.funding_ac_phone}',
+    funding_ac_year =  '${newData.funding_ac_year}',
+    funding_ac_budget = '${newData.funding_ac_budget}',
+    funding_ac_name = '${newData.funding_name}',
+    univercity_ac_budget = '${newData.univercity_ac_budget}',
+    updated_by =  '${newData.funding_updated_by}',
+    updated_date = NOW() 
+    WHERE fundingagency_ac_id  = '${id}' `,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -106,8 +104,7 @@ Coordinator_fundingagency_academic.update = (id, newData, result) => {
 
 Coordinator_fundingagency_academic.delete = (id, result) => {
   sql.query(
-    "DELETE FROM coordinator_fundingagency_academic WHERE coordinator_fundingagency_ac_id = ?  ",
-    id,
+    `DELETE FROM coordinator_fundingagency_academic WHERE fundingagency_ac_id = '${id}'`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -142,21 +139,18 @@ Coordinator_fundingagency_academic.findAll = (result) => {
 
 Coordinator_fundingagency_academic.findOne = (id, result) => {
   sql.query(
-    "SELECT * FROM coordinator_fundingagency_academic WHERE coordinator_fundingagency_ac_id =? ",
-    id,
+    `SELECT * FROM coordinator_fundingagency_academic WHERE fundingagency_ac_id = '${id}' `,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
         return;
       }
-
       if (res.length) {
         console.log("found: ", res[0]);
         result(null, res[0]);
         return;
       }
-
       result({ message: "not_found" }, null);
     }
   );
@@ -164,7 +158,7 @@ Coordinator_fundingagency_academic.findOne = (id, result) => {
 
 Coordinator_fundingagency_academic.sumYearBudjet = (year, result) => {
   sql.query(
-    `SELECT SUM(coordinater_funding_ac_budget)sum FROM coordinator_fundingagency_academic WHERE coordinater_funding_ac_year = ${year}`,
+    `SELECT SUM(funding_ac_budget)sum FROM coordinator_fundingagency_academic WHERE funding_ac_year = '${year}'`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -185,7 +179,8 @@ Coordinator_fundingagency_academic.sumYearBudjet = (year, result) => {
 
 Coordinator_fundingagency_academic.countByYear = (year, result) => {
   sql.query(
-    `SELECT * FROM coordinator_fundingagency_academic WHERE coordinater_funding_ac_year =  ${year}`,
+    "SELECT * FROM coordinator_fundingagency_academic WHERE funding_ac_year  = ?",
+    year,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -194,8 +189,8 @@ Coordinator_fundingagency_academic.countByYear = (year, result) => {
       }
 
       if (res.length) {
-        console.log("found: ", res[0]);
-        result(null, res[0]);
+        console.log("found: ", res);
+        result(null, res);
         return;
       }
 
