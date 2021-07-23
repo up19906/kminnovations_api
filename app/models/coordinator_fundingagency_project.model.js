@@ -4,6 +4,7 @@ const sql = require("./db.js");
 const Coordinator_fundingagency_project = function (data) {
   this.fundingagency_project_type = data.fundingagency_project_type;
   this.fundingagency_project_name = data.fundingagency_project_name;
+  this.select_research = data.select_research;
   this.fundingagency_project_funding = data.fundingagency_project_funding;
   this.fundingagency_project_budget = data.fundingagency_project_budget;
   this.fundingagency_project_star = data.fundingagency_project_star;
@@ -33,6 +34,7 @@ Coordinator_fundingagency_project.create = (newData, result) => {
   (
     fundingagency_project_type,
     fundingagency_project_name,
+    funding_research_team,
     fundingagency_project_funding,
     fundingagency_project_budget, 
     fundingagency_project_star,
@@ -48,6 +50,7 @@ Coordinator_fundingagency_project.create = (newData, result) => {
   (
     '${newData.fundingagency_project_type}',
     '${newData.fundingagency_project_name}',
+    '${newData.select_research}',
     '${newData.fundingagency_project_funding}',
     '${newData.fundingagency_project_budget}',
     '${newData.fundingagency_project_star}',

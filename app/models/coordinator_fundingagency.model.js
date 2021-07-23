@@ -17,6 +17,7 @@ const Coordinator_fundingagency = function (data) {
   this.coordinator_univercity_budget = data.coordinator_univercity_budget;
   this.user_id = data.user_id;
   this.created_by = data.created_by;
+  this.updated_by = data.updated_by;
 };
 
 Coordinator_fundingagency.create = (newData, result) => {
@@ -39,24 +40,23 @@ Coordinator_fundingagency.create = (newData, result) => {
       created_by,
       created_date
     ) 
-    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-    [
-      newData.funding_project_name,
-      newData.coordinator_project,
-      newData.funding_agency,
-      newData.funding_project_leader,
-      newData.funding_phone,
-      newData.select_research,
-      newData.project_status,
-      newData.funding_year,
-      newData.funding_budget,
-      newData.funding_name,
-      newData.funding_type,
-      newData.coordinator_univercity_budget,
-      newData.user_id,
-      newData.created_by,
-      new Date(),
-    ],
+    VALUES(
+      '${newData.funding_project_name}',
+      '${newData.coordinator_project}',
+      '${newData.funding_agency}',
+      '${newData.funding_project_leader}',
+      '${newData.funding_phone}',
+      '${newData.select_research}',
+      '${newData.project_status}',
+      '${newData.funding_year}',
+      '${newData.funding_budget}',
+      '${newData.funding_name}',
+      '${newData.funding_type}',
+      '${newData.coordinator_univercity_budget}',
+      '${newData.user_id}',
+      '${newData.created_by}',
+      NOW()
+    )`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -72,21 +72,22 @@ Coordinator_fundingagency.create = (newData, result) => {
 
 Coordinator_fundingagency.update = (id, newData, result) => {
   sql.query(
-    "UPDATE coordinator_fundingagency SET coordinater_funding_project_name = ?, coordinator_project = ?,coordinater_funding_agency = ?,project_leader = ?,coordinater_funding_phone = ? ,coordinater_funding_year = ?,coordinater_funding_budget = ? ,coordinater_funding_name = ? ,coordinator_univercity_budget = ? ,updated_by = ? ,updated_date = ? WHERE coordinater_funding_id = ? ",
-    [
-      newData.funding_project_name,
-      newData.coordinator_project,
-      newData.funding_agency,
-      newData.funding_project_leader,
-      newData.funding_phone,
-      newData.funding_year,
-      newData.funding_budget,
-      newData.funding_name,
-      newData.coordinator_univercity_budget,
-      newData.funding_updated_by,
-      newData.funding_updated_date,
-      id,
-    ],
+    `UPDATE coordinator_fundingagency SET 
+    coordinater_funding_project_name = '${newData.funding_project_name}',
+     coordinator_project ='${newData.coordinator_project}',
+     coordinater_funding_agency = '${newData.funding_agency}',
+     project_leader = '${newData.funding_project_leader}',
+     coordinater_funding_phone = '${newData.funding_phone}',
+     coordinater_funding_ac_research_team = '${newData.select_research}',
+     coordinator_fundingagency_status_id = '${newData.project_status}',
+     coordinater_funding_year = '${newData.funding_year}',
+     coordinater_funding_budget = '${newData.funding_budget}',
+     coordinater_funding_name = '${newData.funding_name}',
+     budget_id = '${newData.funding_type}',
+     coordinator_univercity_budget = '${newData.coordinator_univercity_budget}',
+     updated_by = '${newData.updated_by}',
+     updated_date = NOW()
+     WHERE coordinater_funding_id = '${id}' `,
     (err, res) => {
       if (err) {
         console.log("error: ", err);

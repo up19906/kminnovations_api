@@ -46,6 +46,7 @@ exports.create = (req, res) => {
     new Coordinator_fundingagency_project({
       fundingagency_project_type: req.body.project_type,
       fundingagency_project_name: req.body.project_name,
+      select_research: req.body.select_research,
       fundingagency_project_funding: req.body.project_funding,
       fundingagency_project_budget: req.body.project_budget,
       fundingagency_project_star: req.body.project_star,

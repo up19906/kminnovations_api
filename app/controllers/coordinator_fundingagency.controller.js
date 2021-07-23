@@ -24,6 +24,7 @@ exports.create = (req, res) => {
     coordinator_univercity_budget: req.body.coordinator_univercity_budget,
     user_id: 10,
     created_by: "upgg",
+    updated_by: req.body.updated_by,
   });
 
   Coordinator_fundingagency.create(coordinator_fundingagency, (err, data) => {

@@ -5,7 +5,8 @@ exports.findAll = (req, res) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving Coordinator about fundingagency.",
+          err.message ||
+          "Some error occurred while retrieving Coordinator about fundingagency.",
       });
     else res.send(data);
   });
@@ -21,16 +22,18 @@ exports.create = (req, res) => {
   }
 
   const coordinator_about_fundingagency = new Coordinator_about_fundingagency({
-    about_fundingagency_name: req.body.name,
-    about_fundingagency_institution: req.body.institution,
-    about_fundingagency_paln_master: req.body.paln_master,
-    about_fundingagency_paln_sub: req.body.paln_sub,
-    about_fundingagency_platform: req.body.platform,
-    about_fundingagency_program: req.body.program,
-    about_fundingagency_point: req.body.point,
-    about_fundingagency_goal: req.body.goal,
-    about_fundingagency_achievement_main: req.body.achievement_main,
-    about_fundingagency_achievement_small: req.body.achievement_small,
+    about_fundingagency_name: req.body.about_fundingagency_name,
+    about_fundingagency_institution: req.body.about_fundingagency_institution,
+    about_fundingagency_paln_master: req.body.about_fundingagency_paln_master,
+    about_fundingagency_paln_sub: req.body.about_fundingagency_paln_sub,
+    about_fundingagency_platform: req.body.about_fundingagency_platform,
+    about_fundingagency_program: req.body.about_fundingagency_program,
+    about_fundingagency_point: req.body.about_fundingagency_point,
+    about_fundingagency_goal: req.body.about_fundingagency_goal,
+    about_fundingagency_achievement_main:
+      req.body.about_fundingagency_achievement_main,
+    about_fundingagency_achievement_small:
+      req.body.about_fundingagency_achievement_small,
   });
 
   Coordinator_about_fundingagency.create(
@@ -41,10 +44,7 @@ exports.create = (req, res) => {
           message:
             err.message || "Some error occurred while creating the User.",
         });
-      else
-        res
-          .status(200)
-          .send(data);
+      else res.status(200).send(data);
     }
   );
 };

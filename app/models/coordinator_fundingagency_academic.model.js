@@ -20,41 +20,40 @@ const Coordinator_fundingagency_academic = function (data) {
 Coordinator_fundingagency_academic.create = (newData, result) => {
   sql.query(
     `INSERT INTO coordinator_fundingagency_academic 
-        (
-          fundingagency_ac_name, 
-          coordinator_ac_project,
-          coordinater_funding_ac_agency,
-          project_ac_leader,
-          funding_ac_phone,
-          funding_ac_research_team,
-          coordinator_fundingagency_status_id,
-          funding_ac_year,
-          funding_ac_budget,
-          funding_ac_name, 
-          budget_id,
-          univercity_ac_budget,
-          user_idcard,
-          created_by,
-          created_date
-        ) 
-      VALUES
-        (
-          '${newData.funding_ac_name}'
-          '${newData.funding_ac_project}',
-          '${newData.funding_ac_agency}',
-          '${newData.funding_ac_leader}',
-          '${newData.funding_ac_phone}',
-          '${newData.select_research}',
-          '${newData.project_status}',
-          '${newData.funding_ac_year}',
-          '${newData.funding_ac_budget}',
-          '${newData.funding_name}',
-          '${newData.funding_type}',
-          '${newData.univercity_ac_budget}',
-          '${newData.user_id}',
-          '${newData.created_by}',
-          NOW()    
-      )`,
+    (
+      fundingagency_ac_name, 
+      coordinator_ac_project,
+      coordinater_funding_ac_agency,
+      project_ac_leader,
+      funding_ac_phone,
+      funding_ac_research_team,
+      coordinator_fundingagency_status_id,
+      funding_ac_year,
+      funding_ac_budget,
+      funding_ac_name,
+      budget_id,
+      univercity_ac_budget,
+      user_idcard,
+      created_by,
+      created_date
+    ) 
+    VALUES(
+      '${newData.funding_ac_name}',
+      '${newData.funding_ac_project}',
+      '${newData.funding_ac_agency}',
+      '${newData.funding_ac_leader}',
+      '${newData.funding_ac_phone}',
+      '${newData.select_research}',
+      '${newData.project_status}',
+      '${newData.funding_ac_year}',
+      '${newData.funding_ac_budget}',
+      '${newData.funding_name}',
+      '${newData.funding_type}',
+      '${newData.univercity_ac_budget}',
+      '${newData.user_id}',
+      '${newData.created_by}',
+      NOW()
+    )`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -81,7 +80,7 @@ Coordinator_fundingagency_academic.update = (id, newData, result) => {
     funding_ac_name = '${newData.funding_name}',
     univercity_ac_budget = '${newData.univercity_ac_budget}',
     updated_by =  '${newData.funding_updated_by}',
-    updated_date = NOW() 
+    updated_date = NOW()
     WHERE fundingagency_ac_id  = '${id}' `,
     (err, res) => {
       if (err) {
