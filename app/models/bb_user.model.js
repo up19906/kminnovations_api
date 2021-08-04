@@ -129,7 +129,7 @@ User.findAllUser = (result) => {
         return;
       }
 
-      console.log("bb_user: ", res);
+      // console.log("bb_user: ", res);
       result(null, res);
     }
   );
