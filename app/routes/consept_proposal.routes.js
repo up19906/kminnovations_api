@@ -4,4 +4,8 @@ module.exports = (app) => {
   app.get("/api/get/concept_proposal", consept_proposal.findAll);
 
   app.post("/api/create/concept_proposal", consept_proposal.create);
+  app.post(
+    "/api/createsubconcept/concept_proposal",
+    consept_proposal.createsubconcept
+  );
 };
