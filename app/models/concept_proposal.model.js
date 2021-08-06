@@ -12,6 +12,10 @@ const concept_proposal = function (data) {
   this.concept_phone = data.concept_phone;
   this.concept_proposal_type = data.concept_proposal_type;
 
+  //update concpt_proposal_sub
+  this.concpt_proposal_sub = data.concpt_proposal_sub;
+  // this.concept_proposal_id = data.concept_proposal_id;
+
   this.concept_proposal_institution = data.concept_proposal_institution;
   this.user_idcard = data.user_idcard;
   //....
@@ -108,6 +112,29 @@ concept_proposal.createsubconcept = (newData, result) => {
       }
       console.log("created: ", { id: res.insertId, ...newData });
       result(null, { id: res.insertId, ...newData });
+    }
+  );
+};
+
+concept_proposal.update_IDsubconcept = (id, newData, result) => {
+  sql.query(
+    `UPDATE concept_proposal SET 
+    concpt_proposal_sub = '${newData.concpt_proposal_sub}'
+    WHERE concept_proposal_id = '${id}' `,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      if (res.affectedRows == 0) {
+        // not found Data with the id
+        result({ message: "not_found" }, null);
+        return;
+      }
+
+      console.log("updated: ", { id: id, ...newData });
+      result(null, { id: id, ...newData });
     }
   );
 };

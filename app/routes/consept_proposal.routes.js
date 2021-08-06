@@ -5,7 +5,7 @@ module.exports = (app) => {
 
   app.post("/api/create/concept_proposal", consept_proposal.create);
   app.post(
-    "/api/createsubconcept/concept_proposal",
-    consept_proposal.createsubconcept
+    "/api/update/concpt_proposal_sub",
+    consept_proposal.update_IDsubconcept
   );
 };
