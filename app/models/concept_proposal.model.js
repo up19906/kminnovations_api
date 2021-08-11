@@ -2,6 +2,7 @@ const sql = require("./db.js");
 
 // constructor
 const concept_proposal = function (data) {
+  this.concpt_proposal_sub = data.concpt_proposal_sub;
   this.project_type_id = data.project_type_id;
   this.concept_proposal_name = data.concept_proposal_name;
   this.source_funds_id = data.source_funds_id;
@@ -38,8 +39,9 @@ concept_proposal.create = (newData, result) => {
   sql.query(
     `INSERT INTO concept_proposal 
   (
+    concpt_proposal_sub,
     project_type_id,
-    concept_proposal_name,
+    concept_proposal_name_th,
     source_funds_id,
     concept_year,
     concept_budget,
@@ -51,6 +53,7 @@ concept_proposal.create = (newData, result) => {
   ) 
   VALUE 
   (
+  '${newData.concpt_proposal_sub}',
   '${newData.project_type_id}',
   '${newData.concept_proposal_name}',
   '${newData.source_funds_id}',

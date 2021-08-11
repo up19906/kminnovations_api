@@ -20,6 +20,7 @@ exports.create = (req, res) => {
   }
 
   const consept_proposal = new Consept_proposal({
+    concpt_proposal_sub: req.body.concpt_proposal_sub,
     project_type_id: req.body.project_type_id,
     concept_proposal_name: req.body.concept_proposal_name,
     source_funds_id: req.body.source_funds_id,
