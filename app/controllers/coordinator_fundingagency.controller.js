@@ -10,18 +10,22 @@ exports.create = (req, res) => {
   }
 
   const coordinator_fundingagency = new Coordinator_fundingagency({
-    funding_project_name: req.body.funding_project_name,
+    project_type_id: req.body.project_type_id,
+    coordinater_funding_project_name: req.body.coordinater_funding_project_name,
     coordinator_project: req.body.coordinator_project,
-    funding_agency: req.body.funding_agency,
-    funding_project_leader: req.body.funding_project_leader,
-    select_research: req.body.select_research,
-    project_status: req.body.project_status,
-    funding_phone: req.body.funding_phone,
-    funding_year: req.body.funding_year,
-    funding_budget: req.body.funding_budget,
-    funding_name: req.body.funding_name,
-    funding_type: req.body.funding_type,
+    coordinater_funding_agency: req.body.coordinater_funding_agency,
+    project_leader: req.body.project_leader,
+    coordinater_funding_phone: req.body.coordinater_funding_phone,
+    coordinater_funding_ac_research_team:
+      req.body.coordinater_funding_ac_research_team,
+    coordinator_fundingagency_status_id:
+      req.body.coordinator_fundingagency_status_id,
+    coordinater_funding_year: req.body.coordinater_funding_year,
+    coordinater_funding_budget: req.body.coordinater_funding_budget,
+    coordinater_funding_name: req.body.coordinater_funding_name,
+    budget_id: req.body.budget_id,
     coordinator_univercity_budget: req.body.coordinator_univercity_budget,
+
     user_id: 10,
     created_by: "upgg",
     updated_by: req.body.updated_by,
