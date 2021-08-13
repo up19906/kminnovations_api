@@ -3,17 +3,21 @@ const sql = require("./db.js");
 // constructor
 const Coordinator_fundingagency = function (data) {
   this.coordinater_funding_id = data.coordinater_funding_id;
-  this.funding_project_name = data.funding_project_name;
+
+  this.project_type_id = data.project_type_id;
+  this.coordinater_funding_project_name = data.coordinater_funding_project_name;
   this.coordinator_project = data.coordinator_project;
-  this.funding_agency = data.funding_agency;
-  this.funding_project_leader = data.funding_project_leader;
-  this.funding_phone = data.funding_phone;
-  this.select_research = data.select_research;
-  this.project_status = data.project_status;
-  this.funding_year = data.funding_year;
-  this.funding_budget = data.funding_budget;
-  this.funding_name = data.funding_name;
-  this.funding_type = data.funding_type;
+  this.coordinater_funding_agency = data.coordinater_funding_agency;
+  this.project_leader = data.project_leader;
+  this.coordinater_funding_phone = data.coordinater_funding_phone;
+  this.coordinater_funding_ac_research_team =
+    data.coordinater_funding_ac_research_team;
+  this.coordinator_fundingagency_status_id =
+    data.coordinator_fundingagency_status_id;
+  this.coordinater_funding_year = data.coordinater_funding_year;
+  this.coordinater_funding_budget = data.coordinater_funding_budget;
+  this.coordinater_funding_name = data.coordinater_funding_name;
+  this.budget_id = data.budget_id;
   this.coordinator_univercity_budget = data.coordinator_univercity_budget;
   this.user_id = data.user_id;
   this.created_by = data.created_by;
@@ -24,6 +28,7 @@ Coordinator_fundingagency.create = (newData, result) => {
   sql.query(
     `INSERT INTO coordinator_fundingagency 
     (
+      project_type_id,
       coordinater_funding_project_name , 
       coordinator_project,
       coordinater_funding_agency,
@@ -41,17 +46,18 @@ Coordinator_fundingagency.create = (newData, result) => {
       created_date
     ) 
     VALUES(
-      '${newData.funding_project_name}',
+      '${newData.project_type_id}',
+      '${newData.coordinater_funding_project_name}',
       '${newData.coordinator_project}',
-      '${newData.funding_agency}',
-      '${newData.funding_project_leader}',
-      '${newData.funding_phone}',
-      '${newData.select_research}',
-      '${newData.project_status}',
-      '${newData.funding_year}',
-      '${newData.funding_budget}',
-      '${newData.funding_name}',
-      '${newData.funding_type}',
+      '${newData.coordinater_funding_agency}',
+      '${newData.project_leader}',
+      '${newData.coordinater_funding_phone}',
+      '${newData.coordinater_funding_ac_research_team}',
+      '${newData.coordinator_fundingagency_status_id}',
+      '${newData.coordinater_funding_year}',
+      '${newData.coordinater_funding_budget}',
+      '${newData.coordinater_funding_name}',
+      '${newData.budget_id}',
       '${newData.coordinator_univercity_budget}',
       '${newData.user_id}',
       '${newData.created_by}',
@@ -73,17 +79,18 @@ Coordinator_fundingagency.create = (newData, result) => {
 Coordinator_fundingagency.update = (id, newData, result) => {
   sql.query(
     `UPDATE coordinator_fundingagency SET 
-    coordinater_funding_project_name = '${newData.funding_project_name}',
+    project_type_id = '${newData.project_type_id}',
+    coordinater_funding_project_name = '${newData.coordinater_funding_project_name}',
      coordinator_project ='${newData.coordinator_project}',
-     coordinater_funding_agency = '${newData.funding_agency}',
-     project_leader = '${newData.funding_project_leader}',
-     coordinater_funding_phone = '${newData.funding_phone}',
-     coordinater_funding_ac_research_team = '${newData.select_research}',
-     coordinator_fundingagency_status_id = '${newData.project_status}',
-     coordinater_funding_year = '${newData.funding_year}',
-     coordinater_funding_budget = '${newData.funding_budget}',
-     coordinater_funding_name = '${newData.funding_name}',
-     budget_id = '${newData.funding_type}',
+     coordinater_funding_agency = '${newData.coordinater_funding_agency}',
+     project_leader = '${newData.project_leader}',
+     coordinater_funding_phone = '${newData.coordinater_funding_phone}',
+     coordinater_funding_ac_research_team = '${newData.coordinater_funding_ac_research_team}',
+     coordinator_fundingagency_status_id = '${newData.coordinator_fundingagency_status_id}',
+     coordinater_funding_year = '${newData.coordinater_funding_year}',
+     coordinater_funding_budget = '${newData.coordinater_funding_budget}',
+     coordinater_funding_name = '${newData.coordinater_funding_name}',
+     budget_id = '${newData.budget_id}',
      coordinator_univercity_budget = '${newData.coordinator_univercity_budget}',
      updated_by = '${newData.updated_by}',
      updated_date = NOW()

@@ -2,26 +2,48 @@ const sql = require("./db.js");
 
 // constructor
 const Source_funds = function (data) {
-  this.source_funds_id = data.source_funds_id;
   this.source_funds_name = data.source_funds_name;
-  this.created_by = data.created_by;
-  this.created_date = data.created_date;
+  this.source_funds_institution = data.source_funds_institution;
+  this.source_funds_paln_master = data.source_funds_paln_master;
+  this.source_funds_paln_sub = data.source_funds_paln_sub;
+  this.source_funds_platform = data.source_funds_platform;
+  this.source_funds_program = data.source_funds_program;
+  this.source_funds_point = data.source_funds_point;
+  this.source_funds_goal = data.source_funds_goal;
+  this.source_funds_achievement_main = data.source_funds_achievement_main;
+  this.source_funds_achievement_small = data.source_funds_achievement_small;
 };
 
 Source_funds.create = (newData, result) => {
   sql.query(
-    "INSERT INTO source_funds(source_funds_name,created_by,created_date) VALUES(?,?,?)",
-    [
-      newData.source_funds_name,
-      // project_id,
-      // concept_proposal_id,
-      // coordinater_funding_id,
-      // coordinater_budgetall_id,
-      newData.created_by,
-      newData.created_date,
-      // updated_by,
-      // updated_date,
-    ],
+    `INSERT INTO source_funds 
+  (
+      source_funds_name,
+      source_funds_institution,
+      source_funds_paln_master,
+      source_funds_paln_sub,
+      source_funds_platform,
+      source_funds_program,
+      source_funds_point,
+      source_funds_goal,
+      source_funds_achievement_main,
+      source_funds_achievement_small,
+      created_date
+  ) 
+  VALUE 
+  (
+  '${newData.source_funds_name}',
+  '${newData.source_funds_institution}',
+  '${newData.source_funds_paln_master}',
+  '${newData.source_funds_paln_sub}',
+  '${newData.source_funds_platform}',
+  '${newData.source_funds_program}',
+  '${newData.source_funds_point}',
+  '${newData.source_funds_goal}',
+  '${newData.source_funds_achievement_main}',
+  '${newData.source_funds_achievement_small}',
+  now()
+  )`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -33,7 +55,7 @@ Source_funds.create = (newData, result) => {
       result(null, { id: res.insertId, ...newData });
     }
   );
-}
+};
 
 Source_funds.findAll = (result) => {
   sql.query("SELECT * FROM source_funds", (err, res) => {
@@ -48,25 +70,28 @@ Source_funds.findAll = (result) => {
   });
 };
 
-Source_funds.findOne = (id, result)=>{
-  sql.query(`SELECT * FROM source_funds WHERE source_funds_id = ${id}`, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
+Source_funds.findOne = (id, result) => {
+  sql.query(
+    `SELECT * FROM source_funds WHERE source_funds_id = ${id}`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
 
-    if (res.length) {
+      if (res.length) {
         console.log("found: ", res[0]);
         result(null, res[0]);
         return;
       }
-  
+
       result({ message: "not_found" }, null);
 
-    // console.log("patent_type: ", res);
-    // result(null, res);
-  });
-}
+      // console.log("patent_type: ", res);
+      // result(null, res);
+    }
+  );
+};
 
 module.exports = Source_funds;
